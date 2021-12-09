@@ -1,132 +1,322 @@
-# The script to run.
-script: train.py
-# The arguments to the script file.
-arguments: [
-  "--kernel", "linear",
-  "--penalty", 1.0
-]
-# The name of the compute target to use for this run.
-target: ccd-comp
-# Framework to execute inside. Allowed values are "Python", "PySpark", "CNTK", "TensorFlow", and "PyTorch".
-framework: Python
-# Communicator for the given framework. Allowed values are "None", "ParameterServer", "OpenMpi", and "IntelMpi".
-communicator: None
-# Maximum allowed duration for the run.
-maxRunDurationSeconds:
-# Number of nodes to use for running job.
-nodeCount: 1
-# Environment details.
-environment:
-  # Environment name
-  name: data_gen_environment
-  # Environment version
-  version:
-  # Environment variables set for the run.
-  environmentVariables:
-    EXAMPLE_ENV_VAR: EXAMPLE_VALUE
-  # Python details
-  python:
-    # user_managed_dependencies=True indicates that the environmentwill be user managed. False indicates that AzureML willmanage the user environment.
-    userManagedDependencies: false
-    # The python interpreter path
-    interpreterPath: python
-    # Path to the conda dependencies file to use for this run. If a project
-    # contains multiple programs with different sets of dependencies, it may be
-    # convenient to manage those environments with separate files.
-    condaDependenciesFile: conda_env_v_1_0_0.yml
-    # The base conda environment used for incremental environment creation.
-    baseCondaEnvironment:
-  # Docker details
-  docker:
-    # Set True to perform this run inside a Docker container.
-    enabled: true
-    # Base image used for Docker-based runs. Mutually exclusive with base_dockerfile.
-    baseImage: mcr.microsoft.com/azureml/base:intelmpi2018.3-ubuntu16.04
-    # Base Dockerfile used for Docker-based runs. Mutually exclusive with base_image
-    baseDockerfile:
-    # Set False if necessary to work around shared volume bugs.
-    sharedVolumes: true
-    # Shared memory size for Docker container. Default is 2g.
-    shmSize: 2g
-    # Extra arguments to the Docker run command.
-    arguments: []
-    # Image registry that contains the base image.
-    baseImageRegistry:
-      # DNS name or IP address of azure container registry(ACR)
-      address:
-      # The username for ACR
-      username:
-      # The password for ACR
-      password:
-  # Spark details
-  spark:
-    # List of spark repositories.
-    repositories: []
-    # The packages to use.
-    packages: []
-    # Whether to precache the packages.
-    precachePackages: true
-  # Databricks details
-  databricks:
-    # List of maven libraries.
-    mavenLibraries: []
-    # List of PyPi libraries
-    pypiLibraries: []
-    # List of RCran libraries
-    rcranLibraries: []
-    # List of JAR libraries
-    jarLibraries: []
-    # List of Egg libraries
-    eggLibraries: []
-  # R details
-  r:
-  # Inferencing stack version
-  inferencingStackVersion:
-# History details.
-history:
-  # Enable history tracking -- this allows status, logs, metrics, and outputs
-  # to be collected for a run.
-  outputCollection: true
-  # Whether to take snapshots for history.
-  snapshotProject: true
-  # Directories to sync with FileWatcher.
-  directoriesToWatch:
-  - logs
-# Spark configuration details.
-spark:
-  # The Spark configuration.
-  configuration:
-    spark.app.name: Azure ML Experiment
-    spark.yarn.maxAppAttempts: 1
-# HDI details.
-hdi:
-  # Yarn deploy mode. Options are cluster and client.
-  yarnDeployMode: cluster
-# Tensorflow details.
-tensorflow:
-  # The number of worker tasks.
-  workerCount: 1
-  # The number of parameter server tasks.
-  parameterServerCount: 1
-# Mpi details.
-mpi:
-  # When using MPI, number of processes per node.
-  processCountPerNode: 1
-# data reference configuration details
-dataReferences: {}
-# The configuration details for data.
-data: {}
-# Project share datastore reference.
-sourceDirectoryDataStore:
-# AmlCompute details.
-ccd-comp:
-  # VM size of the Cluster to be created.Allowed values are Azure vm sizes.The list of vm sizes is available in 'https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs
-  vmSize:
-  # VM priority of the Cluster to be created. Allowed values are:"dedicated" , "lowpriority".
-  vmPriority:
-  # A bool that indicates if the cluster has to be retained after job completion.
-  retainCluster: false
-  # Name of the cluster to be created. If not specified, runId will be used as cluster name.
-  name:
-  # Maximum number of nodes in the AmlCompute cluster to be created. Minimum number of nodes will always be set to 0.
-  clusterMaxNodeCount:
+{
+    "runId": "AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_40",
+    "runUuid": "4ab0eb91-f227-484f-b3ff-b4a7f4ff2572",
+    "parentRunUuid": "444847ca-543e-4f77-8b85-7d068b238199",
+    "rootRunUuid": "444847ca-543e-4f77-8b85-7d068b238199",
+    "target": "ccd-comp",
+    "status": "Completed",
+    "parentRunId": "AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c",
+    "createdTimeUtc": "2021-12-04T11:15:29.5906453+00:00",
+    "startTimeUtc": "2021-12-04T11:15:29.590Z",
+    "endTimeUtc": "2021-12-04T11:17:38.755Z",
+    "error": null,
+    "warnings": [
+        {
+            "source": null,
+            "message": "This run might be using a new job runtime with improved performance and error reporting. The logs from your script are in user_logs/std_log.txt. Please let us know if you run into any issues, and if you would like to opt-out, please add the environment variable AZUREML_COMPUTE_USE_COMMON_RUNTIME to the environment variables section of the job and set its value to the string \"false\""
+        }
+    ],
+    "tags": {
+        "_aml_system_azureml.automlComponent": "AutoML",
+        "_aml_system_ComputeTargetStatus": "{\"AllocationState\":\"steady\",\"PreparingNodeCount\":0,\"RunningNodeCount\":1,\"CurrentNodeCount\":1}",
+        "_aml_system_automl_is_child_run_end_telemetry_event_logged": "True",
+        "model_explain_run_id": "AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_ModelExplain",
+        "model_explanation": "True"
+    },
+    "properties": {
+        "runTemplate": "automl_child",
+        "pipeline_id": "__AutoML_Ensemble__",
+        "pipeline_spec": "{\"pipeline_id\":\"__AutoML_Ensemble__\",\"objects\":[{\"module\":\"azureml.train.automl.ensemble\",\"class_name\":\"Ensemble\",\"spec_class\":\"sklearn\",\"param_args\":[],\"param_kwargs\":{\"automl_settings\":\"{'task_type':'classification','primary_metric':'AUC_weighted','ensemble_iterations':15,'is_timeseries':False,'name':'ccd-1','compute_target':'ccd-comp','subscription_id':'1920a3d2-c38d-45c2-840c-54a8eb31155c','region':'southeastasia'}\",\"ensemble_run_id\":\"AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_40\",\"experiment_name\":\"ccd-1\",\"workspace_name\":\"unique-name-global\",\"subscription_id\":\"1920a3d2-c38d-45c2-840c-54a8eb31155c\",\"resource_group_name\":\"frauddetection\"}}]}",
+        "training_percent": "100",
+        "predicted_cost": null,
+        "iteration": "40",
+        "_aml_system_scenario_identification": "Remote.Child",
+        "_azureml.ComputeTargetType": "amlcompute",
+        "ContentSnapshotId": "172c0c3a-e5b6-4e02-8fc4-e18ea8aa39c4",
+        "ProcessInfoFile": "azureml-logs/process_info.json",
+        "ProcessStatusFile": "azureml-logs/process_status.json",
+        "run_preprocessor": "",
+        "run_algorithm": "VotingEnsemble",
+        "ensembled_iterations": "[14, 15, 23, 37, 7, 29, 17]",
+        "ensembled_algorithms": "['LightGBM', 'ExtremeRandomTrees', 'ExtremeRandomTrees', 'ExtremeRandomTrees', 'RandomForest', 'RandomForest', 'RandomForest']",
+        "ensembled_run_ids": "['AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_14', 'AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_15', 'AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_23', 'AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_37', 'AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_7', 'AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_29', 'AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_17']",
+        "ensemble_weights": "[0.06666666666666667, 0.06666666666666667, 0.06666666666666667, 0.06666666666666667, 0.06666666666666667, 0.13333333333333333, 0.5333333333333333]",
+        "best_individual_pipeline_score": "0.9699734705362167",
+        "best_individual_iteration": "14",
+        "model_output_path": "outputs/model.pkl",
+        "conda_env_data_location": "aml://artifact/ExperimentRun/dcid.AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_40/outputs/conda_env_v_1_0_0.yml",
+        "model_data_location": "aml://artifact/ExperimentRun/dcid.AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_40/outputs/model.pkl",
+        "model_size_on_disk": "8385225",
+        "scoring_data_location": "aml://artifact/ExperimentRun/dcid.AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_40/outputs/scoring_file_v_1_0_0.py",
+        "scoring_data_location_v2": "aml://artifact/ExperimentRun/dcid.AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_40/outputs/scoring_file_v_2_0_0.py",
+        "model_exp_support": "True",
+        "pipeline_graph_version": "1.0.0",
+        "model_name": "AutoMLedd8519c240",
+        "score": "0.9706912590584912",
+        "score_table": "NaN",
+        "run_properties": "\n    estimators=[('14', Pipeline(\n        memory=None,\n        steps=[('sparsenormalizer', Normalizer(\n            copy=True,\n            norm='l1'\n        ",
+        "pipeline_script": "{\"pipeline_id\":\"__AutoML_Ensemble__\",\"objects\":[{\"module\":\"azureml.train.automl.ensemble\",\"class_name\":\"Ensemble\",\"spec_class\":\"sklearn\",\"param_args\":[],\"param_kwargs\":{\"automl_settings\":\"{'task_type':'classification','primary_metric':'AUC_weighted','ensemble_iterations':15,'is_timeseries':False,'name':'ccd-1','compute_target':'ccd-comp','subscription_id':'1920a3d2-c38d-45c2-840c-54a8eb31155c','region':'southeastasia'}\",\"ensemble_run_id\":\"AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_40\",\"experiment_name\":\"ccd-1\",\"workspace_name\":\"unique-name-global\",\"subscription_id\":\"1920a3d2-c38d-45c2-840c-54a8eb31155c\",\"resource_group_name\":\"frauddetection\"}}]}",
+        "training_type": "train_valid",
+        "fit_time": "27",
+        "goal": "AUC_weighted_max",
+        "primary_metric": "AUC_weighted",
+        "errors": "{}",
+        "onnx_model_resource": "{}",
+        "dependencies_versions": "{\"azureml-train-restclients-hyperdrive\": \"1.35.0\", \"azureml-train-core\": \"1.35.0\", \"azureml-train-automl-runtime\": \"1.35.1\", \"azureml-train-automl-client\": \"1.35.0\", \"azureml-telemetry\": \"1.35.0\", \"azureml-responsibleai\": \"1.35.0\", \"azureml-pipeline-core\": \"1.35.0\", \"azureml-mlflow\": \"1.35.0\", \"azureml-interpret\": \"1.35.0\", \"azureml-inference-server-http\": \"0.3.2\", \"azureml-defaults\": \"1.35.0\", \"azureml-dataset-runtime\": \"1.35.0\", \"azureml-dataprep\": \"2.23.2\", \"azureml-dataprep-rslex\": \"1.21.2\", \"azureml-dataprep-native\": \"38.0.0\", \"azureml-core\": \"1.35.0.post1\", \"azureml-automl-runtime\": \"1.35.1\", \"azureml-automl-core\": \"1.35.1\"}",
+        "num_cores": "4",
+        "num_logical_cores": "4",
+        "peak_memory_usage": "1336520",
+        "vm_configuration": "x86_64",
+        "core_hours": "0.012780896666666668",
+        "feature_skus": "automatedml_sdk_guardrails"
+    },
+    "parameters": {},
+    "services": {},
+    "inputDatasets": [
+        {
+            "identifier": {
+                "savedId": "a3ecc11c-5774-4d38-b15f-e14fc1fa6b94",
+                "registeredId": null,
+                "registeredVersion": null
+            },
+            "consumptionType": "RunInput",
+            "inputDetails": {
+                "inputName": "training_data",
+                "mechanism": "Direct",
+                "pathOnCompute": null
+            }
+        }
+    ],
+    "outputDatasets": [],
+    "runDefinition": {
+        "script": "automl_driver.py",
+        "useAbsolutePath": false,
+        "arguments": [],
+        "sourceDirectoryDataStore": null,
+        "framework": "Python",
+        "communicator": "None",
+        "target": "ccd-comp",
+        "dataReferences": {},
+        "data": {},
+        "outputData": {},
+        "datacaches": [],
+        "jobName": null,
+        "maxRunDurationSeconds": null,
+        "nodeCount": 1,
+        "instanceTypes": [],
+        "priority": null,
+        "credentialPassthrough": false,
+        "identity": null,
+        "environment": {
+            "name": "AzureML-AutoML",
+            "version": "90",
+            "python": {
+                "interpreterPath": "python",
+                "userManagedDependencies": false,
+                "condaDependencies": {
+                    "channels": [
+                        "anaconda",
+                        "conda-forge",
+                        "pytorch"
+                    ],
+                    "dependencies": [
+                        "python=3.6.2",
+                        "pip=21.1.2",
+                        {
+                            "pip": [
+                                "azureml-core==1.35.0.post1",
+                                "azureml-mlflow==1.35.0",
+                                "azureml-pipeline-core==1.35.0",
+                                "azureml-telemetry==1.35.0",
+                                "azureml-interpret==1.35.0",
+                                "azureml-responsibleai==1.35.0",
+                                "azureml-automl-core==1.35.1",
+                                "azureml-automl-runtime==1.35.1",
+                                "azureml-train-automl-client==1.35.0",
+                                "azureml-train-automl-runtime==1.35.1",
+                                "azureml-dataset-runtime==1.35.0",
+                                "azureml-defaults==1.35.0",
+                                "inference-schema",
+                                "py-cpuinfo==5.0.0",
+                                "boto3==1.15.18",
+                                "botocore==1.18.18"
+                            ]
+                        },
+                        "numpy~=1.18.0",
+                        "scikit-learn==0.22.1",
+                        "pandas~=0.25.0",
+                        "py-xgboost<=0.90",
+                        "fbprophet==0.5",
+                        "holidays==0.9.11",
+                        "setuptools-git",
+                        "psutil>5.0.0,<6.0.0"
+                    ],
+                    "name": "azureml_705720c76ff57b57c77d577152dabb18"
+                },
+                "baseCondaEnvironment": null
+            },
+            "environmentVariables": {
+                "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+            },
+            "docker": {
+                "baseImage": "mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu18.04:20211012.v1",
+                "platform": {
+                    "os": "Linux",
+                    "architecture": "amd64"
+                },
+                "baseDockerfile": null,
+                "baseImageRegistry": {
+                    "address": null,
+                    "username": null,
+                    "password": null
+                },
+                "enabled": true,
+                "arguments": []
+            },
+            "spark": {
+                "repositories": [],
+                "packages": [],
+                "precachePackages": true
+            },
+            "inferencingStackVersion": null
+        },
+        "history": {
+            "outputCollection": true,
+            "directoriesToWatch": [
+                "logs"
+            ],
+            "enableMLflowTracking": true
+        },
+        "spark": {
+            "configuration": {
+                "spark.app.name": "Azure ML Experiment",
+                "spark.yarn.maxAppAttempts": "1"
+            }
+        },
+        "parallelTask": {
+            "maxRetriesPerWorker": 0,
+            "workerCountPerNode": 1,
+            "terminalExitCodes": null,
+            "configuration": {}
+        },
+        "amlCompute": {
+            "name": null,
+            "vmSize": null,
+            "retainCluster": false,
+            "clusterMaxNodeCount": null
+        },
+        "aiSuperComputer": {
+            "instanceType": "D2",
+            "imageVersion": "pytorch-1.7.0",
+            "location": null,
+            "aiSuperComputerStorageData": null,
+            "interactive": false,
+            "scalePolicy": null,
+            "virtualClusterArmId": null,
+            "tensorboardLogDirectory": null,
+            "sshPublicKey": null,
+            "sshPublicKeys": null,
+            "enableAzmlInt": true,
+            "priority": "Medium",
+            "slaTier": "Standard",
+            "userAlias": null
+        },
+        "kubernetesCompute": {
+            "instanceType": null
+        },
+        "tensorflow": {
+            "workerCount": 1,
+            "parameterServerCount": 1
+        },
+        "mpi": {
+            "processCountPerNode": 1
+        },
+        "pyTorch": {
+            "communicationBackend": null,
+            "processCount": null
+        },
+        "hdi": {
+            "yarnDeployMode": "Cluster"
+        },
+        "containerInstance": {
+            "region": null,
+            "cpuCores": 2,
+            "memoryGb": 3.5
+        },
+        "exposedPorts": null,
+        "docker": {
+            "useDocker": true,
+            "sharedVolumes": true,
+            "shmSize": "2g",
+            "arguments": []
+        },
+        "cmk8sCompute": {
+            "configuration": {}
+        },
+        "commandReturnCodeConfig": {
+            "returnCode": "Zero",
+            "successfulReturnCodes": []
+        },
+        "environmentVariables": {},
+        "applicationEndpoints": {},
+        "parameters": []
+    },
+    "logFiles": {
+        "logs/azureml/17_azureml.log": "https://uniquenameglob7399095157.blob.core.windows.net/azureml/ExperimentRun/dcid.AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_40/logs/azureml/17_azureml.log?sv=2019-07-07&sr=b&sig=zn4diiUlGTbltWoIiCV7KjEhCBntOgIv7mKxsmmvl4o%3D&skoid=df508502-82be-4b4b-b758-9459b60f30eb&sktid=c0cb399b-8896-40d4-9950-4d234929d4d5&skt=2021-12-08T13%3A58%3A23Z&ske=2021-12-09T22%3A08%3A23Z&sks=b&skv=2019-07-07&st=2021-12-09T10%3A16%3A40Z&se=2021-12-09T18%3A26%3A40Z&sp=r",
+        "logs/azureml/azureml_automl-child.log": "https://uniquenameglob7399095157.blob.core.windows.net/azureml/ExperimentRun/dcid.AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_40/logs/azureml/azureml_automl-child.log?sv=2019-07-07&sr=b&sig=o8AZKU1yWITZRAg7ugw2wYdVq94tNtrePXbwaHxa%2Fo4%3D&skoid=df508502-82be-4b4b-b758-9459b60f30eb&sktid=c0cb399b-8896-40d4-9950-4d234929d4d5&skt=2021-12-08T13%3A58%3A23Z&ske=2021-12-09T22%3A08%3A23Z&sks=b&skv=2019-07-07&st=2021-12-09T10%3A16%3A40Z&se=2021-12-09T18%3A26%3A40Z&sp=r",
+        "logs/azureml/azureml_automl.log": "https://uniquenameglob7399095157.blob.core.windows.net/azureml/ExperimentRun/dcid.AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c_40/logs/azureml/azureml_automl.log?sv=2019-07-07&sr=b&sig=dL8S0xkJxQ2hOS9yDsmTLPjHxOYjcfJwwBQvONfse6s%3D&skoid=df508502-82be-4b4b-b758-9459b60f30eb&sktid=c0cb399b-8896-40d4-9950-4d234929d4d5&skt=2021-12-08T13%3A58%3A23Z&ske=2021-12-09T22%3A08%3A23Z&sks=b&skv=2019-07-07&st=2021-12-09T10%3A16%3A40Z&se=2021-12-09T18%3A26%3A40Z&sp=r"
+    },
+    "jobCost": null,
+    "revision": 21,
+    "runTypeV2": {
+        "orchestrator": "Execution",
+        "traits": [
+            "automl",
+            "Remote.Child",
+            "scriptRun",
+            "remote",
+            "AlmostCommonRuntime",
+            "CommonRuntime"
+        ],
+        "attribution": "AutoML",
+        "computeType": "AmlcTrain"
+    },
+    "settings": {},
+    "computeRequest": {
+        "nodeCount": 1,
+        "gpuCount": 0
+    },
+    "compute": null,
+    "createdBy": {
+        "userObjectId": "84e88279-212e-41d9-b9a4-1dd5c2149598",
+        "userPuId": "10032001AD5BF37E",
+        "userIdp": "live.com",
+        "userAltSecId": "1:live.com:0003BFFD42454EF9",
+        "userIss": "https://sts.windows.net/c0cb399b-8896-40d4-9950-4d234929d4d5/",
+        "userTenantId": "c0cb399b-8896-40d4-9950-4d234929d4d5",
+        "userName": "Ambikha B",
+        "upn": null
+    },
+    "computeDuration": "00:02:09.1646177",
+    "effectiveStartTimeUtc": null,
+    "runNumber": 46,
+    "rootRunId": "AutoML_edd8519c-27df-4b5a-8e1e-15726d40531c",
+    "userId": "84e88279-212e-41d9-b9a4-1dd5c2149598",
+    "statusRevision": 0,
+    "hasVirtualParent": false,
+    "currentComputeTime": null,
+    "lastStartTimeUtc": null,
+    "lastModifiedBy": {
+        "userObjectId": "84e88279-212e-41d9-b9a4-1dd5c2149598",
+        "userPuId": "10032001AD5BF37E",
+        "userIdp": "live.com",
+        "userAltSecId": "1:live.com:0003BFFD42454EF9",
+        "userIss": "azureml",
+        "userTenantId": "c0cb399b-8896-40d4-9950-4d234929d4d5",
+        "userName": "Ambikha B",
+        "upn": null
+    },
+    "lastModifiedUtc": "2021-12-04T11:39:22.69065+00:00",
+    "duration": "00:02:09.1646177"
+}
+  
