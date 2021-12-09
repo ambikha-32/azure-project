@@ -6,7 +6,7 @@ arguments: [
   "--penalty", 1.0
 ]
 # The name of the compute target to use for this run.
-target: githubcluster
+target: ccd-comp
 # Framework to execute inside. Allowed values are "Python", "PySpark", "CNTK", "TensorFlow", and "PyTorch".
 framework: Python
 # Communicator for the given framework. Allowed values are "None", "ParameterServer", "OpenMpi", and "IntelMpi".
@@ -33,7 +33,7 @@ environment:
     # Path to the conda dependencies file to use for this run. If a project
     # contains multiple programs with different sets of dependencies, it may be
     # convenient to manage those environments with separate files.
-    condaDependenciesFile: environment.yml
+    condaDependenciesFile: conda_env_v_1_0_0.yml
     # The base conda environment used for incremental environment creation.
     baseCondaEnvironment:
   # Docker details
@@ -119,7 +119,7 @@ data: {}
 # Project share datastore reference.
 sourceDirectoryDataStore:
 # AmlCompute details.
-amlcompute:
+ccd-comp:
   # VM size of the Cluster to be created.Allowed values are Azure vm sizes.The list of vm sizes is available in 'https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs
   vmSize:
   # VM priority of the Cluster to be created. Allowed values are:"dedicated" , "lowpriority".
